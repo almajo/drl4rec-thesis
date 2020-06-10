@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: evaluation-simulator
+  labels:
+    app: alex-data
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: "Never"
+      priorityClassName: "research-med"
+      containers:
+        - name: data-env
+          image: lsx-harbor.informatik.uni-wuerzburg.de/thesis/pytorch:1.0.8
+          imagePullPolicy: "Always"
+          env:
+            - name: REPO
+              value: "/home/stud/grimmalex/thesis/code"
+            - name: PYTHONPATH
+              value: "$(PYTHONPATH):$(REPO)"
+            - name: LD_LIBRARY_PATH
+              value: "/opt/conda/lib:$(LD_LIBRARY_PATH)"
+            - name: OUTPUT_PATH
+              value: "/home/stud/grimmalex/thesis/output"
+          resources:
+            requests:
+              nvidia.com/gpu: "1"
+              cpu: "2"
+              memory: "12Gi"
+            limits:
+              nvidia.com/gpu: "1"
+              cpu: "2"
+              memory: "24Gi"
+          volumeMounts:
+            - mountPath: /home/stud/grimmalex
+              name: repo
+          securityContext:
+            allowPrivilegeEscalation: false
+          command: ["python","-u", "/home/stud/grimmalex/thesis/code/run/run_evaluation.py"]
+          args: ["/home/stud/grimmalex/thesis/output/batch-rl/full-eval", "bpr"]
+      imagePullSecrets:
+        - name: harbor-secret
+      volumes:
+        - name: repo
+          cephfs:
+            monitors:
+              - 132.187.14.16,132.187.14.17,132.187.14.19,132.187.14.20
+            user: studgrimmalex
+            path: /home/stud/grimmalex
+            secretRef:
+              name: ceph-secret

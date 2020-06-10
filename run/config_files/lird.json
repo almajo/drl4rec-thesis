@@ -1,0 +1,52 @@
+{
+  "Actor_Critic_Agents": {
+    "discount_rate": 0.99,
+    "normalise_rewards": false,
+    "clip_rewards": false,
+    "Actor": {
+      "learning_rate": 1e-3,
+      "linear_hidden_units": [
+        50,
+        50
+      ],
+      "final_layer_activation": "tanh",
+      "batch_norm": false,
+      "tau": 0.005,
+      "gradient_clipping_norm": 5,
+      "weight_decay": 0,
+      "update_interval": 1,
+      "dropout": 0,
+      "start_freeze_epochs": 0
+    },
+    "Critic": {
+      "learning_rate": 1e-3,
+      "linear_hidden_units": [
+        100,
+        100
+      ],
+      "final_layer_activation": null,
+      "batch_norm": false,
+      "tau": 0.005,
+      "gradient_clipping_norm": 5,
+      "weight_decay": 0,
+      "dropout": 0
+    },
+    "Replay": {
+      "alpha_prioritised_replay": 0.6,
+      "beta_prioritised_replay": 0.5,
+      "beta_end_value": 1,
+      "beta_end_at_episode": 10000,
+      "incremental_td_error": 1e-7,
+      "buffer_size": 100000
+    },
+    "update_every_n_steps": 1,
+    "target_update_frequency": 1,
+    "learning_updates_per_learning_session": 1,
+    "entropy_term_weight": 0.2,
+    "action_noise_std": 0.2,
+    "action_noise_clipping_range": 0.5,
+    "mu": 0,
+    "theta": 0.5,
+    "sigma": 0.2
+  }
+}

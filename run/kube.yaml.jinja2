@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+generateName: {{ job_name }}-
+spec:
+backoffLimit: 0
+template:
+spec:
+restartPolicy: "Never"
+{#      nodeSelector:#}
+{#        gputype: "rtx2080ti"#}
+priorityClassName: research-med
+containers:
+- name: pytorch12
+image: {{ image }}
+imagePullPolicy: "Always"
+env:
+- name: REPODIR
+value: "/home/stud/grimmalex/thesis/code"
+- name: PYTHONPATH
+value: "$PYTHONPATH:/home/stud/grimmalex/thesis/code"
+- name: LD_LIBRARY_PATH
+value: "/opt/conda/lib:$LD_LIBRARY_PATH"
+- name: DATA_PATH
+value: "/home/stud/grimmalex/datasets"
+- name: BASE_PATH
+value: "/home/stud/grimmalex/thesis/output"
+- name: NUMBA_CACHE_DIR
+value: "/home/stud/grimmalex/tmp_files"
+{#            - name: CUDA_LAUNCH_BLOCKING#}
+{#              value: "1"#}
+{#            - name: CUDNN_LOGINFO_DBG#}
+{#              value: "1"#}
+{#            - name: CUDNN_LOGDEST_DBG#}
+{#              value: {{ cudnn_path }}#}
+resources:
+requests:
+{% if use_gpu -%}nvidia.com/gpu: "1"{% endif %}
+cpu: "{{ cpus }}"
+memory: "{{ memory }}Gi"
+limits:
+{% if use_gpu -%}nvidia.com/gpu: "1"{% endif %}
+cpu: "{{ cpus }}"
+memory: "{{ memory }}Gi"
+securityContext:
+allowPrivilegeEscalation: false
+runAsUser: 1080
+runAsGroup: 1002
+volumeMounts:
+- mountPath: /home/stud/grimmalex
+name: repo
+command: ["python", "-u", "{{ script_path }}"]
+args: [{{ args_str }}]
+imagePullSecrets:
+- name: harbor-secret
+volumes:
+- name: repo
+cephfs:
+monitors:
+- 132.187.14.16,132.187.14.17,132.187.14.19,132.187.14.20
+user: studgrimmalex
+path: /home/stud/grimmalex
+secretRef:
+name: ceph-secret

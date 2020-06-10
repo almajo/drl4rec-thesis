@@ -1,0 +1,22 @@
+{
+  "Policy_Gradient_Agents": {
+    "learning_rate": 1e-3,
+    "update_every_n_steps": 1,
+    "learning_updates_per_learning_session": 1,
+    "linear_hidden_units": [
+      128
+    ],
+    "final_layer_activation": null,
+    "discount_rate": 0.99,
+    "batch_norm": false,
+    "episodes_per_learning_round": 1,
+    "normalise_rewards": false,
+    "gradient_clipping_norm": 5,
+    "clip_rewards": false,
+    "weight_decay": 0,
+    "min_steps_before_learning": 0,
+    "Replay": {
+      "buffer_size": 100000
+    }
+  }
+}

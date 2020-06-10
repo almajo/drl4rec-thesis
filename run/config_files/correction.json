@@ -1,0 +1,19 @@
+{
+  "Policy_Gradient_Agents": {
+    "learning_rate": 1e-3,
+    "linear_hidden_units": [
+      256
+    ],
+    "final_layer_activation": null,
+    "discount_rate": 0.99,
+    "batch_norm": false,
+    "episodes_per_learning_round": 1,
+    "normalise_rewards": false,
+    "gradient_clipping_norm": 5,
+    "clip_rewards": false,
+    "weight_decay": 0,
+    "min_steps_before_learning": 0,
+    "ppo": false,
+    "clip_epsilon": 0.2
+  }
+}
