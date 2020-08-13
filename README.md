@@ -1,6 +1,6 @@
 ### Model-Free Deep Reinforcement Learning for Interactive Recommender Systems: An Evaluation 
 
-This project contains the research code used in my Master's Thesis.
+This project contains the research code used in my Master's thesis.
 
 It is a critic evaluation of different published algorithms on ONE environment, using publicly available datasets. The recommender domain in general suffers from the problem of missing comparability and reproducibility. Hence, I chose it as my master thesis' goal to compare them in an offline and online evaluation setting.
 
@@ -24,6 +24,8 @@ The thesis PDF is located in the root of the project. If you intend to use the c
   month        = 6
 }
 ```
+
+
 
 ## Requirements
 The environment used can be built either with the requirements.txt file, but pytorch needs to be added. 
