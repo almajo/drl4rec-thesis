@@ -1,14 +1,40 @@
-### Model-Free Deep Reinforcement Learning based Recommender Systems: An Evaluation 
+### Model-Free Deep Reinforcement Learning for Interactive Recommender Systems: An Evaluation 
 
 This project contains the research code used in my Master's Thesis.
+
+It is a critic evaluation of different published algorithms on ONE environment, using publicly available datasets. The recommender domain in general suffers from the problem of missing comparability and reproducibility. Hence, I chose it as my master thesis' goal to compare them in an offline and online evaluation setting.
+
+#### Involved algorithms
+ - [TPGR (Tree-based policy gradient)](https://arxiv.org/abs/1811.05869)
+ - [Top-K Off-Policy Correction](https://dl.acm.org/doi/abs/10.1145/3289600.3290999?casa_token=nAl4__wjMn8AAAAA:AM6VEJxARhjLWjXyxxNWSvDFJ1yufd7sKU_aBSCJl6KM2_PgxlqFY39gt3-xFxGIlbeIcVo8WEKyh2o)
+ - [Wolpertinger (alias KNN-Actor-Critic)](https://arxiv.org/abs/1512.07679)
+ - [LIRD (List-Wise Recommendations)](https://arxiv.org/abs/1801.00209)
+ - [NEWS (Parametric DQN)](https://dl.acm.org/doi/abs/10.1145/3178876.3185994?casa_token=Fg-VXbqUkuUAAAAA:ehF64aHRrKt566nrn_PYG9vAMsOLwOSgWhGxH6q5kpLQnWH8fowaIyY7KOJmIn8l5ypgUTqHlGyaIIw)
+ - [QR-DQN (Quantile-Regression DQN)](https://arxiv.org/abs/1710.10044)
+ - [REM (Random Ensemble Mixture)](https://proceedings.icml.cc/static/paper_files/icml/2020/5394-Paper.pdf)
+
+The thesis PDF is located in the root of the project. If you intend to use the code or information from the thesis, make sure to cite.
+```bibtex
+@mastersthesis{
+  author       = {Alexander Grimm}, 
+  title        = {Model-Free Deep Reinforcement Learning for Interactive Recommender Systems: An Evaluation},
+  school       = {Julius-Maximilians-University Würzburg, Germany},
+  year         = 2020,
+  address      = {https://github.com/almajo/drl4rec-thesis},
+  month        = 6
+}
+```
+
+## Requirements
 The environment used can be built either with the requirements.txt file, but pytorch needs to be added. 
 Otherwise the Dockerfile creates a full working docker container.
 
+## Base implementation
 The project's structure is based on and uses components from 
-[https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch][https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch]. 
+[p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch](https://github.com/p-christ/Deep-Reinforcement-Learning-Algorithms-with-PyTorch). 
 The library is put under `drlap`.
 
-However, most used functions and classes are re-implemented.
+However, most used functions and classes are re-implemented for efficiency and readability.
 
 ## Data Preprocessing
 
